@@ -100,7 +100,9 @@ export class PostsComponent implements OnInit {
   loading = false;
   error: string | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+    console.log('PostsComponent loaded');
+  }
 
   ngOnInit() {
     this.loadPosts();

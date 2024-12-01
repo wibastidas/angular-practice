@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-
+  constructor() {
+    console.log('AboutComponent loaded');
+  }
 }

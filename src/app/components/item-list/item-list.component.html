@@ -1,3 +1,5 @@
 <ul>
-  <li *ngFor="let item of items" appHighlight>{{ item }}</li>
+  @for (item of items; track item.id) {
+    <li>{{ item.name }}</li>
+  }
 </ul>

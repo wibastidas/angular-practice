@@ -1,15 +1,15 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-
+import { provideRouter, withPreloading } from '@angular/router';
 import { routes } from './app.routes';
-import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { CustomPreloadingStrategy } from './strategies/custom-preloading.strategy';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    provideHttpClient(
-      withInterceptors([loggingInterceptor])
-    )
+    provideRouter(
+      routes,
+      withPreloading(CustomPreloadingStrategy)
+    ),
+    provideHttpClient()
   ]
 };

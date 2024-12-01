@@ -1,15 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { HighlightDirective } from '../../directives/highlight.directive';
+import { CommonModule } from '@angular/common';
+import { Item } from '../../interfaces/item.interface';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [CommonModule, HighlightDirective],
+  imports: [CommonModule],
   templateUrl: './item-list.component.html',
-  styleUrl: './item-list.component.scss'
+  styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent {
-  @Input() items: string[] = [];
-
+  @Input() items: Item[] = [];
 }

@@ -1,12 +1,31 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { PostsComponent } from './components/posts/posts.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'acerca', component: AboutComponent },
-  { path: 'contacto', component: ContactComponent },
-  { path: 'posts', component: PostsComponent }
+  {
+    path: '',
+    component: HomeComponent  // Eager loading
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./pages/about/about.component')
+      .then(m => m.AboutComponent),
+    data: { preload: true }  // Será precargado
+  },
+  {
+    path: 'contacto',
+    loadComponent: () => import('./pages/contact/contact.component')
+      .then(m => m.ContactComponent),
+    data: { preload: true }  // Será precargado
+  },
+  {
+    path: 'posts',
+    loadComponent: () => import('./components/posts/posts.component')
+      .then(m => m.PostsComponent),
+    data: { preload: false } // Lazy loading puro
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
