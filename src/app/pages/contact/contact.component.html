@@ -1,0 +1,102 @@
+<div class="container">
+  <!-- Template-driven Form -->
+  <section class="form-section">
+    <h2>Formulario Template-driven</h2>
+    <form #templateForm="ngForm" (ngSubmit)="onSubmitTemplate()">
+      <div class="form-group">
+        <label for="name-template">Nombre:</label>
+        <input
+          type="text"
+          id="name-template"
+          name="name"
+          [(ngModel)]="contactModelTemplate.name"
+          required
+          minlength="3"
+          appNoNumbers
+          #nameTemplate="ngModel">
+        <div *ngIf="nameTemplate.invalid && (nameTemplate.dirty || nameTemplate.touched)" class="error-message">
+          <span *ngIf="nameTemplate.errors?.['required']">El nombre es requerido</span>
+          <span *ngIf="nameTemplate.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email-template">Email:</label>
+        <input
+          type="email"
+          id="email-template"
+          name="email"
+          [(ngModel)]="contactModelTemplate.email"
+          required
+          email
+          #emailTemplate="ngModel">
+        <div *ngIf="emailTemplate.invalid && (emailTemplate.dirty || emailTemplate.touched)" class="error-message">
+          <span *ngIf="emailTemplate.errors?.['required']">El email es requerido</span>
+          <span *ngIf="emailTemplate.errors?.['email']">Ingrese un email válido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message-template">Mensaje:</label>
+        <textarea
+          id="message-template"
+          name="message"
+          [(ngModel)]="contactModelTemplate.message"
+          required
+          minlength="10"
+          #messageTemplate="ngModel"></textarea>
+        <div *ngIf="messageTemplate.invalid && (messageTemplate.dirty || messageTemplate.touched)" class="error-message">
+          <span *ngIf="messageTemplate.errors?.['required']">El mensaje es requerido</span>
+          <span *ngIf="messageTemplate.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!templateForm.valid">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Reactive Form -->
+  <section class="form-section">
+    <h2>Formulario Reactivo</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmitReactive()">
+      <div class="form-group">
+        <label for="name-reactive">Nombre:</label>
+        <input
+          type="text"
+          id="name-reactive"
+          formControlName="name"
+          [class.is-invalid]="contactForm.get('name')?.errors?.['noNumbers'] && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)">
+        <div *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)" class="error-message">
+          <span *ngIf="contactForm.get('name')?.errors?.['required']">El nombre es requerido</span>
+          <span *ngIf="contactForm.get('name')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</span>
+          <span *ngIf="contactForm.get('name')?.errors?.['noNumbers']">El nombre no puede contener números</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email-reactive">Email:</label>
+        <input
+          type="email"
+          id="email-reactive"
+          formControlName="email">
+        <div *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="error-message">
+          <span *ngIf="contactForm.get('email')?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="contactForm.get('email')?.errors?.['email']">Ingrese un email válido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message-reactive">Mensaje:</label>
+        <textarea
+          id="message-reactive"
+          formControlName="message"></textarea>
+        <div *ngIf="contactForm.get('message')?.invalid && (contactForm.get('message')?.dirty || contactForm.get('message')?.touched)" class="error-message">
+          <span *ngIf="contactForm.get('message')?.errors?.['required']">El mensaje es requerido</span>
+          <span *ngIf="contactForm.get('message')?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+    </form>
+  </section>
+</div>
