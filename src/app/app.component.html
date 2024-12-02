@@ -1,11 +1,13 @@
 <nav>
-  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-  <br>
-  <a routerLink="/about" routerLinkActive="active">Acerca de</a>
-  <br>
-  <a routerLink="/contacto" routerLinkActive="active">Contacto</a>
-  <br>
-  <a routerLink="/posts" routerLinkActive="active">Posts</a>
+  <ul>
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+    <li><a routerLink="/posts" routerLinkActive="active">Posts</a></li>
+    <li><a routerLink="/posts-with-comments" routerLinkActive="active">Posts con Comentarios</a></li>
+    <li><a routerLink="/rxjs-demo" routerLinkActive="active">RxJS Demo</a></li>
+    <li><a routerLink="/shared-state" routerLinkActive="active">Estado Compartido</a></li>
+    <li><a routerLink="/layout" routerLinkActive="active">Layout Demo</a></li>
+  </ul>
 </nav>
 
 <router-outlet></router-outlet>

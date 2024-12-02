@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, firstValueFrom } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Post } from '../interfaces/post.interface';
+import { PostComment } from '../interfaces/comment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,17 @@ export class ApiService {
   deletePost(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  // Métodos con Promesas
+  getPostsPromise(): Promise<Post[]> {
+    return firstValueFrom(this.http.get<Post[]>(`${this.apiUrl}/posts`));
+  }
+
+  getCommentsForPostPromise(postId: number): Promise<PostComment[]> {
+    return firstValueFrom(
+      this.http.get<PostComment[]>(`${this.apiUrl}/posts/${postId}/comments`)
     );
   }
 }

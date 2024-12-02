@@ -25,6 +25,33 @@ export const routes: Routes = [
     data: { preload: false } // Lazy loading puro
   },
   {
+    path: 'posts/:id',  // Nueva ruta con parámetro
+    loadComponent: () => import('./components/post-detail/post-detail.component')
+      .then(m => m.PostDetailComponent),
+    data: { preload: false }
+  },
+  {
+    path: 'posts-with-comments',
+    loadComponent: () => import('./components/post-with-comments/post-with-comments.component')
+      .then(m => m.PostWithCommentsComponent),
+    data: { preload: false }
+  },
+  {
+    path: 'rxjs-demo',
+    loadComponent: () => import('./components/rxjs-demo/rxjs-demo.component')
+      .then(m => m.RxjsDemoComponent)
+  },
+  {
+    path: 'shared-state',
+    loadComponent: () => import('./components/shared-state-demo/shared-state-demo.component')
+      .then(m => m.SharedStateDemoComponent)
+  },
+  {
+    path: 'layout',
+    loadComponent: () => import('./components/layout-demo/layout-demo.component')
+      .then(m => m.LayoutDemoComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Post } from '../../interfaces/post.interface';
 import { finalize } from 'rxjs/operators';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   template: `
     <div class="posts-container">
       <h2>Posts</h2>
@@ -40,6 +41,7 @@ import { finalize } from 'rxjs/operators';
           <h3>{{post.title}}</h3>
           <p>{{post.body}}</p>
           <div class="post-actions">
+            <a [routerLink]="['/posts', post.id]">Ver detalle</a>
             <button (click)="editPost(post)" [disabled]="loading">Editar</button>
             <button (click)="deletePost(post.id)" [disabled]="loading">Eliminar</button>
           </div>
